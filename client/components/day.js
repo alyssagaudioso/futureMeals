@@ -11,20 +11,26 @@ class Day extends Component {
       username: this.props.username,
       day: this.props.day,
       savedRecipes: []
-      // label: '',
-      // image: '',
-      // url: '',
-      // yield: 0,
-      // healthLabels: [],
-      // ingredientLines: []
     }
+  }
+
+  deleteSavedRecipe(index){
+    console.log('in the deleteSavedRecipe function');
+    axios.delete('/saveRecipe', { params: { day: this.state.day, 
+                                            username: this.state.username, 
+                                            label: this.state.label }})
+      .then(response => {
+        let newState = {};
+        newState.savedRecipes = this.state.savedRecipes.splice(index,1);
+        this.setState(newState);
+        //have to change the state of day parent component saved recipies
+      });
   }
 
   componentDidMount() {
     console.log('in component did mount')
     axios.get(`day/${this.state.day}/${this.state.username}`)
       .then((response) => {
-        console.log(response.data);
         this.setState({savedRecipes: response.data});
       });
   }
@@ -32,7 +38,11 @@ class Day extends Component {
   render() {
 
     const recipes = this.state.savedRecipes.map((curr, index) => {
-      return <SavedRecipe recipeData={curr} key={index} />
+       return 
+        // <div>
+          {/*<button value="delete" onClick={() => this.deleteSavedRecipe(index)}>Delete</button>*/}
+          <SavedRecipe day={this.state.day} username={this.state.username} recipeData={curr} key={index} />
+         {/*</div>*/}
     });
 
     return (
