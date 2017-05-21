@@ -31,6 +31,10 @@ class Recipe extends Component {
 
   render() {
     console.log(this.state)
+
+    let ingredients = this.props.recipedata.recipe.ingredientLines.map((curr, index) => {
+      return <li>{curr}</li>
+    })
     //ingredientLines is an array so wont display properly
     return (
       <div>
@@ -50,9 +54,9 @@ class Recipe extends Component {
         </form>
         <a href={this.props.recipedata.recipe.url}><img src={this.props.recipedata.recipe.image}/></a>
         <h3>{this.props.recipedata.recipe.label}</h3>
-        <p>{this.props.recipedata.recipe.ingredientLines}</p>
-        <span>{this.props.recipedata.recipe.yield}</span>
-        <span>{this.props.recipedata.recipe.calories}</span>
+        <ul>{ingredients}</ul>
+        <p>Yield: {this.props.recipedata.recipe.yield}</p>
+        <p>Calories: {this.props.recipedata.recipe.calories}</p>
       </div>
     )
   }

@@ -40,10 +40,14 @@ class RecipeDisplay extends Component {
   }
 
   render() {
-    console.log('inside recipe display render function')
     let recipes = this.state.recipes.map((curr, i) => {
       return <Recipe recipedata={curr} username={this.props.username} key={i} />
     })
+
+    // const ingredients = this.props.recipeData.ingredientLines[0].split(/,|;/g).map((ingredient, index) => {
+    //   console.log(ingredient)
+    //   return <li>{ingredient}</li>
+    // })
 
     return (
       <div>

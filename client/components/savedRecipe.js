@@ -11,12 +11,14 @@ class SavedRecipe extends Component {
       label: this.props.recipeData.label
     }
 
-  }
 
   render() {
-    const ingredients = this.props.recipeData.ingredientLines.map((ingredient, index) => {
-      return <li>{ingredient} key={index}</li>
+    console.log('INGREDIENT LINES', this.props.recipeData.ingredientLines)
+  const ingredients = this.props.recipeData.ingredientLines[0].split(/,|;/g).map((ingredient, index) => {
+    console.log(ingredient)
+      return <li>{ingredient}</li>
     })
+    // console.log('INGREDIENTS ---->', Array.isArray(ingredients))
 
     return (
       <div>
